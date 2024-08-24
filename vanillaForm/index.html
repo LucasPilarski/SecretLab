@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vanilla form</title>
+    <script src="script.js"></script>
+</head>
+<body>
+  <form id="form-main" data-valid="false">
+    <p>SIMPLE FORM</p>
+    <label for="input-name">Name
+    <input id="input-name"
+           name="name"
+           type="text"
+           data-valid="false"
+           data-dirty="false"
+           data-validation-required="true"
+           data-validation-max-text="10">
+    </label>
+    <p id="input-name-errors"></p>
+    <label for="input-age">Age
+      <input id="input-age"
+             name="age"
+             type="number"
+             data-valid="false"
+             data-dirty="false"
+             data-validation-required="true"
+             data-validation-min-number="15"
+             data-validation-max-number="100">
+    </label>
+    <p id="input-age-errors"></p>
+    <button id="form-main-submit" type="submit" disabled="disabled">Submit</button>
+    <p id="form-main-status"></p>
+    <text-input type="text"></text-input>
+  </form>
+</body>
+</html>
