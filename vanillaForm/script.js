@@ -1,21 +1,3 @@
-class TextInput extends HTMLElement {
-    static observedAttributes = ["type"];
-
-    constructor() {
-        super();
-        debugger
-        const element = document.createElement('template')
-        element.innerHTML = '<label>Test<input type="text"/></label>'
-        this.attachShadow({mode: "open"}).appendChild(element.content.cloneNode(true))
-    }
-
-    connectedCallback() {
-        // this.shadowRoot.querySelector('input').type = this.getAttribute('type')
-    }
-}
-
-customElements.define('text-input', TextInput)
-
 const errorMessages = {
     required: "This field is required",
     maxtext: "This value can't be longer than {value} characters",
@@ -62,20 +44,21 @@ const validateForm = (id) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    document.getElementById('form-main').addEventListener('submit', e => {
-        e.preventDefault()
-        if (e.target.dataset.valid === 'true') {
-            document.getElementById(`${e.target.id}-status`).textContent = 'Submitting'
-            let formData = {}
-            const inputs = e.target.getElementsByTagName("input")
-            for (let i = 0; i < inputs.length; i++) {
-                formData[inputs[i].name] = inputs[i].value
+    for (const form of document.forms) {
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            if (e.target.dataset.valid === 'true') {
+                document.getElementById(`${e.target.id}-status`).textContent = 'Submitting'
+                let formData = {}
+                const inputs = e.target.getElementsByTagName("input")
+                for (const input of inputs) {
+                    formData[input.name] = input.value
+                }
+                console.log(formData)
+                document.getElementById(`${e.target.id}-status`).textContent = ''
             }
-            console.log(formData)
-            document.getElementById(`${e.target.id}-status`).textContent = ''
-        }
-    })
+        })
+    }
 
     document.getElementById('form-main').addEventListener('keyup', e => {
         if (e.key === 'Tab') {
